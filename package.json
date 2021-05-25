@@ -31,8 +31,12 @@
 		"@types/react": "^17.0.0",
 		"@types/react-dom": "^17.0.0",
 		"autoprefixer": "^9",
+		"husky": "^4",
+		"lint-staged": "^11.0.0",
 		"postcss": "^7",
 		"postcss-import": "^12",
+		"prettier": "^2.3.0",
+		"pretty-quick": "^3.1.0",
 		"react-scripts": "4.0.3",
 		"tailwindcss": "npm:@tailwindcss/postcss7-compat",
 		"typescript": "^4.1.2"
@@ -67,5 +71,15 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged -p false",
+			"pre-push": "yarn test"
+		}
+	},
+	"lint-staged": {
+		"*.(css|js|jsx|json|htm|html|scss|ts|tsx)": "pretty-quick --staged",
+		"*.(js|jsx|ts|tsx)": "eslint"
 	}
 }
