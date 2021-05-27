@@ -12,7 +12,7 @@ export interface EditContactProps {
 }
 
 export default function EditContact({
-	initialValues = { firstName: '', lastName: '', email: '', phone: '' },
+	initialValues = { firstName: '', lastName: '', email: '', phone: '', address: '' },
 	onSubmit,
 }: EditContactProps) {
 	const handleFormikSubmit = (values: Contact, { validateForm }: FormikHelpers<Contact>) => {
@@ -54,6 +54,14 @@ export default function EditContact({
 							name="phone"
 							type="tel"
 							value={values.phone}
+							onChange={handleChange}
+						/>
+						<FormControl
+							className="col-span-2"
+							label="Address"
+							name="address"
+							type="multiline"
+							value={values.address}
 							onChange={handleChange}
 						/>
 						<div className="pt-2 text-right md:col-span-2">
