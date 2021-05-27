@@ -7,7 +7,8 @@ export interface FormControlProps {
 	error?: string;
 	inputClassName?: string;
 	label?: string;
-	type?: 'email' | 'password' | 'text';
+	name?: string;
+	type?: 'email' | 'password' | 'tel' | 'text';
 	value?: string;
 	onChange?(event: ChangeEvent): void;
 }
@@ -17,11 +18,13 @@ export default function FormControl({
 	error,
 	inputClassName,
 	label,
+	name,
 	type = 'text',
 	value,
 	onChange,
 }: FormControlProps) {
 	const inputClasses = classNames(
+		'w-full',
 		{
 			'border-red-700 bg-red-100 text-red-700': !!error,
 		},
@@ -32,6 +35,7 @@ export default function FormControl({
 		<div className={className}>
 			<TextInput
 				className={inputClasses}
+				name={name}
 				placeholder={label}
 				type={type}
 				value={value}
