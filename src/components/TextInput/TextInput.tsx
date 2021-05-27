@@ -5,7 +5,7 @@ export interface TextInputProps {
 	className?: string;
 	name?: string;
 	placeholder?: string;
-	type?: 'email' | 'password' | 'tel' | 'text';
+	type?: 'email' | 'multiline' | 'password' | 'tel' | 'text';
 	value?: string;
 	onChange?(event: ChangeEvent): void;
 }
@@ -18,9 +18,20 @@ export default function TextInput({
 	value,
 	onChange,
 }: TextInputProps) {
-	return (
+	const classes = classNames(
+		'px-2 py-1 border border-gray-300 rounded-md',
+		{
+			'h-20': type === 'multiline',
+		},
+		className
+	);
+	return type === 'multiline' ? (
+		<textarea className={classes} name={name} placeholder={placeholder} onChange={onChange}>
+			{value}
+		</textarea>
+	) : (
 		<input
-			className={classNames('px-2 py-1 border border-gray-300 rounded-md', className)}
+			className={classes}
 			name={name}
 			placeholder={placeholder}
 			type={type}

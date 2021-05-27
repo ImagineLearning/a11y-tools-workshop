@@ -8,7 +8,7 @@ export interface FormControlProps {
 	inputClassName?: string;
 	label?: string;
 	name?: string;
-	type?: 'email' | 'password' | 'tel' | 'text';
+	type?: 'email' | 'multiline' | 'password' | 'tel' | 'text';
 	value?: string;
 	onChange?(event: ChangeEvent): void;
 }

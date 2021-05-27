@@ -11,12 +11,18 @@ export default meta;
 
 const Template: Story<TextInputProps> = (args) => <TextInput {...args} />;
 
-export const WithPlaceholder = Template.bind({});
-WithPlaceholder.args = {
+export const SingleLine = Template.bind({});
+SingleLine.args = {
 	placeholder: 'Enter text...',
 };
 
-export const WithValue = Template.bind({});
-WithValue.args = {
+export const SingleLineWithValue = Template.bind({});
+SingleLineWithValue.args = {
 	value: 'Text entered.',
+};
+
+export const Multiline = Template.bind({});
+Multiline.args = {
+	type: 'multiline',
+	placeholder: 'Enter text...',
 };
