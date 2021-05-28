@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { MouseEvent, PropsWithChildren, useMemo } from 'react';
 import TabBarContext, { TabBarContextType } from './TabBarContext';
 
@@ -17,7 +18,7 @@ function TabBar({ children, className, selected, onClick }: PropsWithChildren<Ta
 	);
 
 	return (
-		<nav className={className}>
+		<nav className={classNames('mr-2 whitespace-nowrap overflow-x-auto', className)}>
 			<TabBarContext.Provider value={value}>{children}</TabBarContext.Provider>
 		</nav>
 	);
