@@ -2,17 +2,27 @@ import { faBan, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Formik, FormikHelpers } from 'formik';
 import React from 'react';
+import * as yup from 'yup';
 import { Contact } from '../../models/contact';
 import Button from '../Button/Button';
 import FormControl from '../FormControl/FormControl';
 
 export interface EditContactProps {
 	initialValues?: Contact;
+	onCancel?(): void;
 	onSubmit?(contact: Contact): void;
 }
 
+const validationSchema = yup.object().shape({
+	firstName: yup.string().required('Enter your first name'),
+	lastName: yup.string().required('Enter your last name'),
+	email: yup.string().email('Enter a valid email address'),
+	phone: yup.string().matches(/[0-9]{3}[-.]?[0-9]{3}[-.]?[0-9]{4}/, 'Enter a valid phone number'),
+});
+
 export default function EditContact({
 	initialValues = { firstName: '', lastName: '', email: '', phone: '', address: '' },
+	onCancel,
 	onSubmit,
 }: EditContactProps) {
 	const handleFormikSubmit = (values: Contact, { validateForm }: FormikHelpers<Contact>) => {
@@ -21,54 +31,69 @@ export default function EditContact({
 
 	return (
 		<div>
-			<Formik initialValues={initialValues} onSubmit={handleFormikSubmit}>
-				{({ values, handleChange, handleSubmit }) => (
+			<Formik
+				initialValues={initialValues}
+				onSubmit={handleFormikSubmit}
+				validationSchema={validationSchema}
+				validateOnChange={false}
+			>
+				{({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
 					<form
 						className="grid grid-cols-1 md:grid-cols-2 gap-4"
 						onSubmit={handleSubmit}
 						noValidate
 					>
 						<FormControl
+							error={touched.firstName && errors.firstName}
 							label="First Name"
 							name="firstName"
 							type="text"
 							value={values.firstName}
+							onBlur={handleBlur}
 							onChange={handleChange}
 						/>
 						<FormControl
+							error={touched.lastName && errors.lastName}
 							label="Last Name"
 							name="lastName"
 							type="text"
 							value={values.lastName}
+							onBlur={handleBlur}
 							onChange={handleChange}
 						/>
 						<FormControl
+							error={touched.email && errors.email}
 							label="Email Address"
 							name="email"
 							type="email"
 							value={values.email}
+							onBlur={handleBlur}
 							onChange={handleChange}
 						/>
 						<FormControl
+							error={touched.phone && errors.phone}
 							label="Phone Number"
 							name="phone"
 							type="tel"
 							value={values.phone}
+							onBlur={handleBlur}
 							onChange={handleChange}
 						/>
 						<FormControl
 							className="col-span-2"
+							error={touched.address && errors.address}
 							label="Address"
 							name="address"
 							type="multiline"
 							value={values.address}
+							onBlur={handleBlur}
 							onChange={handleChange}
 						/>
 						<div className="pt-2 text-right md:col-span-2">
 							<Button className="mr-2" type="submit" buttonType="primary">
 								<FontAwesomeIcon icon={faCheck} />
 							</Button>
-							<Button type="button">
+							<Button type="button" onClick={onCancel}>
 								<FontAwesomeIcon icon={faBan} />
 							</Button>
 						</div>

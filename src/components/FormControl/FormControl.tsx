@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEventHandler, FocusEventHandler } from 'react';
 import TextInput from '../TextInput/TextInput';
 
 export interface FormControlProps {
@@ -10,10 +10,11 @@ export interface FormControlProps {
 	name?: string;
 	type?: 'email' | 'multiline' | 'password' | 'tel' | 'text';
 	value?: string;
-	onChange?(event: ChangeEvent): void;
+	onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+	onChange?: ChangeEventHandler;
 }
 
-export default function FormControl({
+function FormControl({
 	className,
 	error,
 	inputClassName,
@@ -21,6 +22,7 @@ export default function FormControl({
 	name,
 	type = 'text',
 	value,
+	onBlur,
 	onChange,
 }: FormControlProps) {
 	const inputClasses = classNames(
@@ -39,9 +41,12 @@ export default function FormControl({
 				placeholder={label}
 				type={type}
 				value={value}
+				onBlur={onBlur}
 				onChange={onChange}
 			/>
 			{error && <p className="mt-1 text-red-700">{error}</p>}
 		</div>
 	);
 }
+
+export default React.memo(FormControl);

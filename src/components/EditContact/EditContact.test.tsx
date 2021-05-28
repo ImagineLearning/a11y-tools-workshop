@@ -18,6 +18,7 @@ describe('<AddContact />', () => {
 			lastName: 'Doe',
 			email: 'john@example.com',
 			phone: '555-555-5555',
+			address: '1234 Street\nAnytown, USA',
 		};
 
 		const { getAllByRole } = render(<EditContact initialValues={initialValues} />);

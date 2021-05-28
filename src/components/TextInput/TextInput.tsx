@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEventHandler, FocusEventHandler } from 'react';
 
 export interface TextInputProps {
 	className?: string;
@@ -7,7 +7,8 @@ export interface TextInputProps {
 	placeholder?: string;
 	type?: 'email' | 'multiline' | 'password' | 'tel' | 'text';
 	value?: string;
-	onChange?(event: ChangeEvent): void;
+	onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+	onChange?: ChangeEventHandler;
 }
 
 export default function TextInput({
@@ -16,6 +17,7 @@ export default function TextInput({
 	type = 'text',
 	placeholder,
 	value,
+	onBlur,
 	onChange,
 }: TextInputProps) {
 	const classes = classNames(
@@ -26,9 +28,14 @@ export default function TextInput({
 		className
 	);
 	return type === 'multiline' ? (
-		<textarea className={classes} name={name} placeholder={placeholder} onChange={onChange}>
-			{value}
-		</textarea>
+		<textarea
+			className={classes}
+			name={name}
+			placeholder={placeholder}
+			value={value}
+			onBlur={onBlur}
+			onChange={onChange}
+		></textarea>
 	) : (
 		<input
 			className={classes}
@@ -36,6 +43,7 @@ export default function TextInput({
 			placeholder={placeholder}
 			type={type}
 			value={value}
+			onBlur={onBlur}
 			onChange={onChange}
 		/>
 	);
