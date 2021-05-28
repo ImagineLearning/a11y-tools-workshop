@@ -44,7 +44,7 @@ export default function EditContact({
 						noValidate
 					>
 						<FormControl
-							error={touched.firstName && errors.firstName}
+							error={touched.firstName ? errors.firstName : undefined}
 							label="First Name"
 							name="firstName"
 							type="text"
@@ -53,7 +53,7 @@ export default function EditContact({
 							onChange={handleChange}
 						/>
 						<FormControl
-							error={touched.lastName && errors.lastName}
+							error={touched.lastName ? errors.lastName : undefined}
 							label="Last Name"
 							name="lastName"
 							type="text"
@@ -62,7 +62,7 @@ export default function EditContact({
 							onChange={handleChange}
 						/>
 						<FormControl
-							error={touched.email && errors.email}
+							error={touched.email ? errors.email : undefined}
 							label="Email Address"
 							name="email"
 							type="email"
@@ -71,7 +71,7 @@ export default function EditContact({
 							onChange={handleChange}
 						/>
 						<FormControl
-							error={touched.phone && errors.phone}
+							error={touched.phone ? errors.phone : undefined}
 							label="Phone Number"
 							name="phone"
 							type="tel"
@@ -81,7 +81,7 @@ export default function EditContact({
 						/>
 						<FormControl
 							className="col-span-2"
-							error={touched.address && errors.address}
+							error={touched.address ? errors.address : undefined}
 							label="Address"
 							name="address"
 							type="multiline"
