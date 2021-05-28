@@ -3,7 +3,7 @@ import React from 'react';
 import FormControl, { FormControlProps } from './FormControl';
 
 const meta: Meta = {
-	title: 'FormControl',
+	title: 'Form Control',
 	component: FormControl,
 };
 

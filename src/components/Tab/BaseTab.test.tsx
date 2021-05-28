@@ -1,8 +1,7 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import Tab from './Tab';
 import userEvent from '@testing-library/user-event';
-import TabBarContext from '../TabBar/TabBarContext';
+import React from 'react';
+import Tab from './BaseTab';
 
 describe('<Tab />', () => {
 	it('renders tab', () => {
@@ -11,17 +10,17 @@ describe('<Tab />', () => {
 	});
 
 	it('passes value to click handler', () => {
-		const onClick = jest.fn();
+		const handleClick = jest.fn();
 		const { getByText } = render(
-			<TabBarContext.Provider value={{ onClick }}>
-				<Tab value="tab1">Tab 1</Tab>
-			</TabBarContext.Provider>
+			<Tab value="tab1" onClick={handleClick}>
+				Tab 1
+			</Tab>
 		);
 
 		const tab = getByText('Tab 1');
 		userEvent.click(tab);
 
-		const [[, value]] = onClick.mock.calls;
+		const [[, value]] = handleClick.mock.calls;
 		expect(value).toBe('tab1');
 	});
 });

@@ -1,23 +1,25 @@
-import React, { PropsWithChildren } from 'react';
 import { Meta, Story } from '@storybook/react';
-import Tab, { TabProps } from './Tab';
+import React, { PropsWithChildren } from 'react';
+import BaseTab, { BaseTabProps } from './BaseTab';
 
 const meta: Meta = {
 	title: 'Tab',
-	component: Tab,
+	component: BaseTab,
 };
 
 export default meta;
 
-const Template: Story<PropsWithChildren<TabProps>> = (args) => <Tab {...args} />;
+const Template: Story<PropsWithChildren<BaseTabProps>> = (args) => <BaseTab {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
 	children: 'Tab',
+	value: 'tab',
 };
 
 export const Selected = Template.bind({});
 Selected.args = {
 	children: 'Tab',
 	selected: true,
+	value: 'tab',
 };
