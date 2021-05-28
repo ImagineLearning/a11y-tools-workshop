@@ -7,12 +7,7 @@ export interface TabBarProps {
 	onClick?(event: MouseEvent, value?: string | number): void;
 }
 
-export default function TabBar({
-	children,
-	className,
-	selected,
-	onClick,
-}: PropsWithChildren<TabBarProps>) {
+function TabBar({ children, className, selected, onClick }: PropsWithChildren<TabBarProps>) {
 	const value: TabBarContextType = useMemo(
 		() => ({
 			selected,
@@ -27,3 +22,5 @@ export default function TabBar({
 		</nav>
 	);
 }
+
+export default React.memo(TabBar);
