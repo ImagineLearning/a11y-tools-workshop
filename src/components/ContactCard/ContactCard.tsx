@@ -1,7 +1,8 @@
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
+import Button from '../Button/Button';
 
 export interface ContactCardProps {
 	className?: string;
@@ -10,6 +11,8 @@ export interface ContactCardProps {
 	email?: string;
 	phone?: string;
 	address?: string;
+	onClickDelete?: MouseEventHandler<HTMLButtonElement>;
+	onClickEdit?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function ContactCard({
@@ -19,6 +22,8 @@ export default function ContactCard({
 	email,
 	phone,
 	address,
+	onClickDelete,
+	onClickEdit,
 }: ContactCardProps) {
 	return (
 		<div className={classNames('flex flex-row p-3 border border-gray-300 rounded-md', className)}>
@@ -53,6 +58,22 @@ export default function ContactCard({
 						))}
 					</div>
 				)}
+				<div className="text-right">
+					<Button
+						className="text-sm text-gray-400 hover:text-blue-600 focus:text-blue-600"
+						buttonType="clear"
+						onClick={onClickEdit}
+					>
+						<FontAwesomeIcon icon={faEdit} />
+					</Button>
+					<Button
+						className="text-sm text-gray-400 hover:text-red-700 focus:text-red-700"
+						buttonType="clear"
+						onClick={onClickDelete}
+					>
+						<FontAwesomeIcon icon={faTrash} />
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

@@ -45,3 +45,9 @@ Warning.args = {
 	buttonType: 'warning',
 	children: 'Warning Button',
 };
+
+export const Clear = Template.bind({});
+Clear.args = {
+	buttonType: 'clear',
+	children: 'Clear Button',
+};
