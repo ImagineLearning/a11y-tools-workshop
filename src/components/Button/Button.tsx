@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import React, { PropsWithChildren, SyntheticEvent } from 'react';
+import React, { MouseEventHandler, PropsWithChildren } from 'react';
 
 export interface ButtonProps {
 	buttonType?: 'default' | 'primary' | 'secondary' | 'success' | 'alert' | 'warning';
 	className?: string;
 	type?: 'button' | 'submit' | 'reset';
-	onClick?(event: SyntheticEvent): void;
+	onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function Button({

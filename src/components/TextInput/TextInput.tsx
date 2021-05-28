@@ -8,7 +8,7 @@ export interface TextInputProps {
 	type?: 'email' | 'multiline' | 'password' | 'tel' | 'text';
 	value?: string;
 	onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-	onChange?: ChangeEventHandler;
+	onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 export default function TextInput({

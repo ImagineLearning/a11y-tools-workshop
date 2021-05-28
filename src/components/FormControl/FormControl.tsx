@@ -11,7 +11,7 @@ export interface FormControlProps {
 	type?: 'email' | 'multiline' | 'password' | 'tel' | 'text';
 	value?: string;
 	onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-	onChange?: ChangeEventHandler;
+	onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 function FormControl({
