@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { Contact } from '../../models/contact';
 import Button from '../Button/Button';
 import FormControl from '../FormControl/FormControl';
+import { v4 as uuid } from 'uuid';
 
 export interface EditContactProps {
 	initialValues?: Contact;
@@ -21,7 +22,7 @@ const validationSchema = yup.object().shape({
 });
 
 export default function EditContact({
-	initialValues = { firstName: '', lastName: '', email: '', phone: '', address: '' },
+	initialValues = { id: uuid(), firstName: '', lastName: '', email: '', phone: '', address: '' },
 	onCancel,
 	onSubmit,
 }: EditContactProps) {
@@ -43,6 +44,7 @@ export default function EditContact({
 						onSubmit={handleSubmit}
 						noValidate
 					>
+						<input type="hidden" name="id" value={values.id} />
 						<FormControl
 							error={touched.firstName ? errors.firstName : undefined}
 							label="First Name"

@@ -19,6 +19,7 @@
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-modal": "^3.13.1",
+		"uuid": "^8.3.2",
 		"web-vitals": "^1.0.1",
 		"yup": "^0.32.9"
 	},
@@ -38,6 +39,7 @@
 		"@types/react": "^17.0.0",
 		"@types/react-dom": "^17.0.0",
 		"@types/react-modal": "^3.12.0",
+		"@types/uuid": "^8.3.0",
 		"autoprefixer": "^9",
 		"husky": "^4",
 		"lint-staged": "^11.0.0",

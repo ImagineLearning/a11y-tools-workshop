@@ -15,6 +15,7 @@ describe('<EditContact />', () => {
 
 	it('renders form with initial values', () => {
 		const initialValues: Contact = {
+			id: 1,
 			firstName: 'George',
 			lastName: 'Washington',
 			email: 'george@example.com',
@@ -94,6 +95,7 @@ describe('<EditContact />', () => {
 
 	it('calls onSubmit for valid from', async () => {
 		const contact: Contact = {
+			id: 1,
 			firstName: 'George',
 			lastName: 'Washington',
 			email: 'george@example.com',
