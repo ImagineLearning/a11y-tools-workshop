@@ -1,5 +1,8 @@
-.ReactModal__Body--open .Modal__AppRoot {
+.ReactModal__Body--open {
 	max-height: 100vh;
 	overflow-y: hidden;
+}
+
+.ReactModal__Body--open #root {
 	filter: blur(4px);
 }

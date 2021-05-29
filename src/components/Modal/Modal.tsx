@@ -1,10 +1,10 @@
-import React, { PropsWithChildren, useLayoutEffect, useRef, useState } from 'react';
-import ReactModal from 'react-modal';
-import './Modal.css';
-import Button from '../Button/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+import React, { PropsWithChildren } from 'react';
+import ReactModal from 'react-modal';
+import Button from '../Button/Button';
+import './Modal.css';
 
 export type ModalProps = Pick<
 	ReactModal.Props,
@@ -18,25 +18,6 @@ export default function Modal({
 	isOpen,
 	onRequestClose,
 }: PropsWithChildren<ModalProps>) {
-	const [hasOverlayRef, setHasOverlayRef] = useState(false);
-	const overlayRef = useRef(null);
-	const rootRef = useRef<Element>(null);
-
-	useLayoutEffect(() => {
-		if (!hasOverlayRef || !!rootRef.current) {
-			return;
-		}
-
-		rootRef.current = findAppRoot(overlayRef.current);
-		if (!rootRef.current) {
-			return;
-		}
-
-		const classes = new Set(rootRef.current.className?.split(' ').filter((c) => !!c) ?? []);
-		classes.add('Modal__AppRoot');
-		rootRef.current.className = [...classes.values()].join(' ');
-	}, [hasOverlayRef]);
-
 	return (
 		<ReactModal
 			ariaHideApp={ariaHideApp}
@@ -45,11 +26,7 @@ export default function Modal({
 				className
 			)}
 			isOpen={isOpen}
-			overlayClassName="fixed top-0 left-0 h-screen w-full flex flex-col justify-center items-center bg-black bg-opacity-70"
-			overlayRef={(node) => {
-				overlayRef.current = node;
-				setHasOverlayRef(true);
-			}}
+			overlayClassName="fixed top-0 left-0 h-screen w-full flex flex-col justify-center items-center bg-black bg-opacity-60"
 			shouldCloseOnEsc={true}
 			shouldCloseOnOverlayClick={true}
 			onRequestClose={onRequestClose}
@@ -59,14 +36,5 @@ export default function Modal({
 			</Button>
 			{children}
 		</ReactModal>
-	);
-}
-
-function findAppRoot(child: Element | null) {
-	if (!child?.parentElement) {
-		return null;
-	}
-	return (
-		child.parentElement.querySelector('div[aria-hidden=true]') ?? findAppRoot(child.parentElement)
 	);
 }
