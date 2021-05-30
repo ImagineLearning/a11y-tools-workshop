@@ -6,36 +6,36 @@ import './TabPanel.css';
 
 export interface TabPanelProps {
 	className?: string;
-	initialTab?: string | number;
+	selected?: string | number;
 	tabs?: ReactNode;
 	tabBarClassName?: string;
 	tabContentPanelClassName?: string;
+	onClickTab?(value?: string | number): void;
 }
 
 export default function TabPanel({
 	children,
 	className,
-	initialTab,
+	selected,
 	tabs,
 	tabBarClassName,
 	tabContentPanelClassName,
+	onClickTab,
 }: PropsWithChildren<TabPanelProps>) {
-	const [tab, setTab] = useState<string | number | undefined>(initialTab);
-
 	const handleTabClick = (_: MouseEvent, value?: string | number) => {
-		setTab(value);
+		onClickTab?.(value);
 	};
 
 	return (
 		<div className={classNames('TabPanel', className)}>
 			<TabBar
 				className={classNames('tab-bar', tabBarClassName)}
-				selected={tab}
+				selected={selected}
 				onClick={handleTabClick}
 			>
 				{tabs}
 			</TabBar>
-			<TabContentPanel className={tabContentPanelClassName} selected={tab}>
+			<TabContentPanel className={tabContentPanelClassName} selected={selected}>
 				{children}
 			</TabContentPanel>
 		</div>

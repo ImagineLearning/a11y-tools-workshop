@@ -9,7 +9,7 @@ describe('<TabPanel />', () => {
 	it('renders tab bar and tab content', () => {
 		const { getByText, queryByText } = render(
 			<TabPanel
-				initialTab="tab2"
+				selected="tab2"
 				tabs={[
 					<Tab key="tab1" value="tab1">
 						Tab 1
@@ -30,10 +30,11 @@ describe('<TabPanel />', () => {
 		expect(queryByText('Tab 1 Content')).toBeNull();
 	});
 
-	it('clicking a tab changes content', () => {
-		const { getByText, queryByText } = render(
+	it('clicking a tab calls the onTabClick(..) handler', () => {
+		const handleClick = jest.fn();
+		const { getByText } = render(
 			<TabPanel
-				initialTab="tab2"
+				selected="tab2"
 				tabs={[
 					<Tab key="tab1" value="tab1">
 						Tab 1
@@ -42,18 +43,15 @@ describe('<TabPanel />', () => {
 						Tab 2
 					</Tab>,
 				]}
+				onClickTab={handleClick}
 			>
 				<TabContent tab="tab1">Tab 1 Content</TabContent>
 				<TabContent tab="tab2">Tab 2 Content</TabContent>
 			</TabPanel>
 		);
 
-		expect(getByText('Tab 2 Content')).toBeInTheDocument();
-		expect(queryByText('Tab 1 Content')).toBeNull();
-
 		userEvent.click(getByText('Tab 1'));
 
-		expect(getByText('Tab 1 Content')).toBeInTheDocument();
-		expect(queryByText('Tab 2 Content')).toBeNull();
+		expect(handleClick).toHaveBeenCalledWith('tab1');
 	});
 });

@@ -15,7 +15,7 @@ const Template: Story<PropsWithChildren<TabPanelProps>> = (args) => <TabPanel {.
 
 export const Default = Template.bind({});
 Default.args = {
-	initialTab: 'tab1',
+	selected: 'tab1',
 	tabs: (
 		<>
 			<Tab value="tab1">Tab 1</Tab>
