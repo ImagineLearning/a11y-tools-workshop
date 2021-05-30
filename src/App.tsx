@@ -7,8 +7,7 @@ import EditContactModal from './components/EditContactModal/EditContactModal';
 import Tab from './components/Tab/Tab';
 import TabContent from './components/TabContentPanel/TabContent';
 import TabPanel from './components/TabPanel/TabPanel';
-import { Contact } from './helpers/contact';
-import groupBy from 'lodash-es/groupBy';
+import { Contact, groupContacts, sortContacts } from './helpers/contact';
 
 const CONTACTS = [
 	{
@@ -46,20 +45,8 @@ export default function App() {
 	const [contacts, setContacts] = useState<Contact[]>(CONTACTS);
 	const [contact, setContact] = useState<Contact | undefined>();
 
-	const contactGroups = useMemo(
-		() =>
-			groupBy(contacts, ({ lastName }) => {
-				const initial = lastName.toLowerCase().charCodeAt(0);
-				if (initial >= 97 && initial < 105) {
-					return 'a-h';
-				}
-				if (initial >= 105 && initial < 113) {
-					return 'i-p';
-				}
-				return 'q-z';
-			}),
-		[contacts]
-	);
+	const sortedContacts = useMemo(() => sortContacts(contacts), [contacts]);
+	const contactGroups = useMemo(() => groupContacts(contacts, TAB_GROUPS), [sortedContacts]);
 
 	const handleClickTab = (value: string) => {
 		setTab(value);

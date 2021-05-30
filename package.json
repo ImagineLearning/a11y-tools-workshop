@@ -97,6 +97,9 @@
 	"jest": {
 		"coveragePathIgnorePatterns": [
 			"\\.stories\\.tsx$"
+		],
+		"transformIgnorePatterns": [
+			"<rootDir>/node_modules/(?!lodash-es)"
 		]
 	}
 }
