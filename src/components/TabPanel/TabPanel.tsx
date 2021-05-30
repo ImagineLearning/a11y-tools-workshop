@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { MouseEvent, PropsWithChildren, ReactNode, useState } from 'react';
+import React, { MouseEvent, PropsWithChildren, ReactNode } from 'react';
 import TabBar from '../TabBar/TabBar';
 import TabContentPanel from '../TabContentPanel/TabContentPanel';
 import './TabPanel.css';
