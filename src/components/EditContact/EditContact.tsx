@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Formik, FormikHelpers } from 'formik';
 import React from 'react';
 import * as yup from 'yup';
-import { Contact } from '../../models/contact';
+import { Contact } from '../../helpers/contact';
 import Button from '../Button/Button';
 import FormControl from '../FormControl/FormControl';
 import { v4 as uuid } from 'uuid';

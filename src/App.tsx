@@ -7,7 +7,7 @@ import EditContactModal from './components/EditContactModal/EditContactModal';
 import Tab from './components/Tab/Tab';
 import TabContent from './components/TabContentPanel/TabContent';
 import TabPanel from './components/TabPanel/TabPanel';
-import { Contact } from './models/contact';
+import { Contact } from './helpers/contact';
 import groupBy from 'lodash-es/groupBy';
 
 const CONTACTS = [

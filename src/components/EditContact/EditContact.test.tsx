@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { Contact } from '../../models/contact';
+import { Contact } from '../../helpers/contact';
 import EditContact from './EditContact';
 
 describe('<EditContact />', () => {

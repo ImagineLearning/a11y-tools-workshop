@@ -1,5 +1,5 @@
 import React from 'react';
-import { Contact } from '../../models/contact';
+import { Contact } from '../../helpers/contact';
 import ContactCard from '../ContactCard/ContactCard';
 
 export interface ContactListProps {

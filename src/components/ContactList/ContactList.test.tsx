@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import ContactList from './ContactList';
-import { Contact } from '../../models/contact';
+import { Contact } from '../../helpers/contact';
 import userEvent from '@testing-library/user-event';
 
 describe('<ContactList />', () => {
