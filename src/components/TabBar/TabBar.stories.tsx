@@ -1,7 +1,7 @@
-import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import TabBar, { TabBarProps } from './TabBar';
+import React, { PropsWithChildren } from 'react';
 import Tab from '../Tab/Tab';
+import TabBar, { TabBarProps } from './TabBar';
 
 const meta: Meta = {
 	title: 'Tab Bar',
@@ -10,7 +10,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<TabBarProps> = (args) => <TabBar {...args} />;
+const Template: Story<PropsWithChildren<TabBarProps>> = (args) => <TabBar {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
