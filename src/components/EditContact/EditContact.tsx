@@ -82,7 +82,7 @@ export default function EditContact({
 							onChange={handleChange}
 						/>
 						<FormControl
-							className="col-span-2"
+							className="md:col-span-2"
 							error={touched.address ? errors.address : undefined}
 							label="Address"
 							name="address"
@@ -91,7 +91,7 @@ export default function EditContact({
 							onBlur={handleBlur}
 							onChange={handleChange}
 						/>
-						<div className="pt-2 text-right md:col-span-2">
+						<div className="pt-2 md:text-right md:col-span-2">
 							<Button className="mr-2" type="submit" buttonType="primary">
 								<FontAwesomeIcon icon={faCheck} />
 							</Button>
