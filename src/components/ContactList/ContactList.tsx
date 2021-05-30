@@ -4,13 +4,19 @@ import ContactCard from '../ContactCard/ContactCard';
 
 export interface ContactListProps {
 	className?: string;
-	contacts: Contact[];
+	contacts?: Contact[];
 	title?: string;
 	onClickEdit?(contact: Contact): void;
 	onClickDelete?(contact: Contact): void;
 }
 
-function ContactList({ className, contacts, title, onClickDelete, onClickEdit }: ContactListProps) {
+function ContactList({
+	className,
+	contacts = [],
+	title,
+	onClickDelete,
+	onClickEdit,
+}: ContactListProps) {
 	return (
 		<div className={className}>
 			{title && <h2 className="mb-2 font-bold text-xl">{title}</h2>}
