@@ -92,10 +92,14 @@ export default function EditContact({
 							onChange={handleChange}
 						/>
 						<div className="pt-2 md:text-right md:col-span-2">
-							<Button className="mr-2" type="submit" buttonType="primary">
+							<Button
+								className="mb-2 w-full md:mb-2 md:mr-2 md:w-auto"
+								type="submit"
+								buttonType="primary"
+							>
 								<FontAwesomeIcon icon={faCheck} />
 							</Button>
-							<Button type="button" onClick={onCancel}>
+							<Button className="w-full md:w-auto" type="button" onClick={onCancel}>
 								<FontAwesomeIcon icon={faBan} />
 							</Button>
 						</div>
