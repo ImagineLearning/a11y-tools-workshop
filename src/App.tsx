@@ -2,6 +2,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import ContactList from './components/ContactList/ContactList';
+import DeleteContactModal from './components/DeleteContactModal/DeleteContactModal';
 import EditContactModal from './components/EditContactModal/EditContactModal';
 import Tab from './components/Tab/Tab';
 import TabContent from './components/TabContentPanel/TabContent';
@@ -37,11 +38,17 @@ const contacts = [
 
 export default function App() {
 	const [tab, setTab] = useState('a-h');
+	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 	const [editModalOpen, setEditModalOpen] = useState(false);
 	const [contact, setContact] = useState<Contact | undefined>();
 
 	const handleClickTab = (value: string) => {
 		setTab(value);
+	};
+
+	const handleClickDeleteContact = (contact: Contact) => {
+		setContact(contact);
+		setDeleteModalOpen(true);
 	};
 
 	const handleClickEditContact = (contact: Contact) => {
@@ -52,6 +59,11 @@ export default function App() {
 	const handleCancelEdit = () => {
 		setContact(undefined);
 		setEditModalOpen(false);
+	};
+
+	const handleCancelDelete = () => {
+		setContact(undefined);
+		setDeleteModalOpen(false);
 	};
 
 	return (
@@ -81,23 +93,44 @@ export default function App() {
 					onClickTab={handleClickTab}
 				>
 					<TabContent tab="a-h">
-						<ContactList contacts={contacts} onClickEdit={handleClickEditContact} />
+						<ContactList
+							contacts={contacts}
+							onClickDelete={handleClickDeleteContact}
+							onClickEdit={handleClickEditContact}
+						/>
 					</TabContent>
 					<TabContent tab="i-p">
-						<ContactList contacts={[]} onClickEdit={handleClickEditContact} />
+						<ContactList
+							contacts={[]}
+							onClickDelete={handleClickDeleteContact}
+							onClickEdit={handleClickEditContact}
+						/>
 					</TabContent>
 					<TabContent tab="q-z">
-						<ContactList contacts={[]} onClickEdit={handleClickEditContact} />
+						<ContactList
+							contacts={[]}
+							onClickDelete={handleClickDeleteContact}
+							onClickEdit={handleClickEditContact}
+						/>
 					</TabContent>
 					<TabContent tab="search">
 						<h2 className="mb-2 font-bold text-xl">Search Results</h2>
-						<ContactList contacts={[]} onClickEdit={handleClickEditContact} />
+						<ContactList
+							contacts={[]}
+							onClickDelete={handleClickDeleteContact}
+							onClickEdit={handleClickEditContact}
+						/>
 					</TabContent>
 				</TabPanel>
 				<EditContactModal
 					isOpen={editModalOpen}
 					initialValues={contact}
 					onCancel={handleCancelEdit}
+				/>
+				<DeleteContactModal
+					isOpen={deleteModalOpen}
+					name={`${contact?.firstName} ${contact?.lastName}`}
+					onClickCancel={handleCancelDelete}
 				/>
 			</main>
 		</div>
