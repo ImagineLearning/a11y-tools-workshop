@@ -1,6 +1,6 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ContactList from './components/ContactList/ContactList';
 import DeleteContactModal from './components/DeleteContactModal/DeleteContactModal';
 import EditContactModal from './components/EditContactModal/EditContactModal';
@@ -8,8 +8,9 @@ import Tab from './components/Tab/Tab';
 import TabContent from './components/TabContentPanel/TabContent';
 import TabPanel from './components/TabPanel/TabPanel';
 import { Contact } from './models/contact';
+import groupBy from 'lodash-es/groupBy';
 
-const contacts = [
+const CONTACTS = [
 	{
 		id: 1,
 		firstName: 'Aaron',
@@ -36,11 +37,29 @@ const contacts = [
 	},
 ];
 
+const TAB_GROUPS = ['a-h', 'i-p', 'q-z'];
+
 export default function App() {
 	const [tab, setTab] = useState('a-h');
 	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 	const [editModalOpen, setEditModalOpen] = useState(false);
+	const [contacts, setContacts] = useState<Contact[]>(CONTACTS);
 	const [contact, setContact] = useState<Contact | undefined>();
+
+	const contactGroups = useMemo(
+		() =>
+			groupBy(contacts, ({ lastName }) => {
+				const initial = lastName.toLowerCase().charCodeAt(0);
+				if (initial >= 97 && initial < 105) {
+					return 'a-h';
+				}
+				if (initial >= 105 && initial < 113) {
+					return 'i-p';
+				}
+				return 'q-z';
+			}),
+		[contacts]
+	);
 
 	const handleClickTab = (value: string) => {
 		setTab(value);
@@ -75,15 +94,14 @@ export default function App() {
 				<TabPanel
 					tabs={
 						<>
-							<Tab className="font-bold" value="a-h">
-								A - H
-							</Tab>
-							<Tab className="font-bold" value="i-p">
-								I - P
-							</Tab>
-							<Tab className="font-bold" value="q-z">
-								Q - Z
-							</Tab>
+							{TAB_GROUPS.map((group) => (
+								<Tab key={group} className="font-bold" value={group}>
+									{group
+										.split('-')
+										.map((char) => char.toUpperCase())
+										.join(' - ')}
+								</Tab>
+							))}
 							<Tab className="font-bold" value="search">
 								<FontAwesomeIcon icon={faSearch} />
 							</Tab>
@@ -92,35 +110,25 @@ export default function App() {
 					selected={tab}
 					onClickTab={handleClickTab}
 				>
-					<TabContent tab="a-h">
-						<ContactList
-							contacts={contacts}
-							onClickDelete={handleClickDeleteContact}
-							onClickEdit={handleClickEditContact}
-						/>
-					</TabContent>
-					<TabContent tab="i-p">
-						<ContactList
-							contacts={[]}
-							onClickDelete={handleClickDeleteContact}
-							onClickEdit={handleClickEditContact}
-						/>
-					</TabContent>
-					<TabContent tab="q-z">
-						<ContactList
-							contacts={[]}
-							onClickDelete={handleClickDeleteContact}
-							onClickEdit={handleClickEditContact}
-						/>
-					</TabContent>
-					<TabContent tab="search">
-						<h2 className="mb-2 font-bold text-xl">Search Results</h2>
-						<ContactList
-							contacts={[]}
-							onClickDelete={handleClickDeleteContact}
-							onClickEdit={handleClickEditContact}
-						/>
-					</TabContent>
+					<>
+						{TAB_GROUPS.map((group) => (
+							<TabContent key={group} tab={group}>
+								<ContactList
+									contacts={contactGroups[group]}
+									onClickDelete={handleClickDeleteContact}
+									onClickEdit={handleClickEditContact}
+								/>
+							</TabContent>
+						))}
+						<TabContent tab="search">
+							<h2 className="mb-2 font-bold text-xl">Search Results</h2>
+							<ContactList
+								contacts={[]}
+								onClickDelete={handleClickDeleteContact}
+								onClickEdit={handleClickEditContact}
+							/>
+						</TabContent>
+					</>
 				</TabPanel>
 				<EditContactModal
 					isOpen={editModalOpen}
