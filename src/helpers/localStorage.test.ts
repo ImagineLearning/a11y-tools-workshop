@@ -1,4 +1,3 @@
-import noop from 'lodash-es/noop';
 import { readFromLocalStorage, writeToLocalStorage } from './localStorage';
 
 describe('local storage helpers', () => {
