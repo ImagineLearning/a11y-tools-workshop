@@ -21,7 +21,7 @@ function BaseTab({
 	};
 
 	return (
-		<div
+		<button
 			className={classNames(
 				'BaseTab inline-block px-5 pt-1 pb-1 rounded-t-md border border-gray-300 cursor-pointer',
 				{
@@ -39,7 +39,7 @@ function BaseTab({
 			>
 				{children}
 			</span>
-		</div>
+		</button>
 	);
 }
 
