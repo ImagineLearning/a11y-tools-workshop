@@ -11,14 +11,16 @@ describe('<SearchBox />', () => {
 
 	it('onSubmit(..) calls handler with search text', () => {
 		const handleSubmit = jest.fn();
-		const { getByPlaceholderText, getByRole } = render(
+		const { getByPlaceholderText, getAllByRole } = render(
 			<SearchBox placeholder="Search..." onSubmit={handleSubmit} />
 		);
 
 		const input = getByPlaceholderText('Search...');
 		userEvent.type(input, 'This is my search');
 
-		const button = getByRole('button');
+		const button = getAllByRole('button').find(
+			(b) => (b as HTMLButtonElement).type === 'submit'
+		) as HTMLButtonElement;
 		userEvent.click(button);
 
 		expect(handleSubmit).toHaveBeenCalledWith('This is my search');
