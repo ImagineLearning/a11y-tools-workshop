@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 import React from 'react';
 import SearchBox from './SearchBox';
 
@@ -40,5 +41,11 @@ describe('<SearchBox />', () => {
 
 		expect((input as HTMLInputElement).value).toBe('');
 		expect(handleReset).toHaveBeenCalled();
+	});
+
+	it('has no a11y violations', async () => {
+		const { container } = render(<SearchBox initialValue="Hello world!" />);
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
 	});
 });
