@@ -1,6 +1,6 @@
 import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Button from './components/Button/Button';
 import ContactList from './components/ContactList/ContactList';
 import DeleteContactModal from './components/DeleteContactModal/DeleteContactModal';
@@ -10,41 +10,19 @@ import Tab from './components/Tab/Tab';
 import TabContent from './components/TabContentPanel/TabContent';
 import TabPanel from './components/TabPanel/TabPanel';
 import { Contact, groupContacts, searchContacts, sortContacts } from './helpers/contact';
-
-const CONTACTS = [
-	{
-		id: 1,
-		firstName: 'Aaron',
-		lastName: 'Aaronson',
-		email: 'aaron@example.com',
-		phone: '555-123-4567',
-		address: '1234 Street\nAnytown, USA',
-	},
-	{
-		id: 2,
-		firstName: 'Bob',
-		lastName: 'Bobertson',
-		email: 'bob@example.com',
-		phone: '555-123-4568',
-		address: '1235 Street\nAnytown, USA',
-	},
-	{
-		id: 3,
-		firstName: 'Chandler',
-		lastName: 'Chandlerson',
-		email: 'chandler@example.com',
-		phone: '555-123-4569',
-		address: '1236 Street\nAnytown, USA',
-	},
-];
+import { readFromLocalStorage, writeToLocalStorage } from './helpers/localStorage';
 
 const TAB_GROUPS = ['a-h', 'i-p', 'q-z'];
 
+const STORAGE_KEY = 'contacts';
+
 export default function App() {
-	const [tab, setTab] = useState('a-h');
+	const [tab, setTab] = useState(TAB_GROUPS[0]);
 	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 	const [editModalOpen, setEditModalOpen] = useState(false);
-	const [contacts, setContacts] = useState<Contact[]>(CONTACTS);
+	const [contacts, setContacts] = useState<Contact[]>(
+		() => readFromLocalStorage<Contact[]>(STORAGE_KEY, []) as Contact[]
+	);
 	const [contact, setContact] = useState<Contact | undefined>();
 	const [search, setSearch] = useState('');
 
@@ -54,6 +32,12 @@ export default function App() {
 		() => (search ? searchContacts(sortedContacts, search) : []),
 		[sortedContacts, search]
 	);
+
+	useEffect(() => {
+		if (sortedContacts) {
+			writeToLocalStorage(STORAGE_KEY, sortedContacts);
+		}
+	}, [sortedContacts]);
 
 	const handleSearchSubmit = (term: string) => {
 		setSearch(term);
