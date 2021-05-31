@@ -5,6 +5,14 @@ import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+if (process.env.NODE_ENV !== 'production') {
+	import('@axe-core/react').then(({ default: axe }) => {
+		axe(React, ReactDOM, 1000);
+	});
+}
+
+ReactModal.setAppElement('#root');
+
 ReactDOM.render(
 	<React.StrictMode>
 		<App />
@@ -16,5 +24,3 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-ReactModal.setAppElement('#root');
