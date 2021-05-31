@@ -1,13 +1,15 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useMemo, useState } from 'react';
+import Button from './components/Button/Button';
 import ContactList from './components/ContactList/ContactList';
 import DeleteContactModal from './components/DeleteContactModal/DeleteContactModal';
 import EditContactModal from './components/EditContactModal/EditContactModal';
+import SearchBox from './components/SearchBox/SearchBox';
 import Tab from './components/Tab/Tab';
 import TabContent from './components/TabContentPanel/TabContent';
 import TabPanel from './components/TabPanel/TabPanel';
-import { Contact, groupContacts, sortContacts } from './helpers/contact';
+import { Contact, groupContacts, searchContacts, sortContacts } from './helpers/contact';
 
 const CONTACTS = [
 	{
@@ -44,9 +46,19 @@ export default function App() {
 	const [editModalOpen, setEditModalOpen] = useState(false);
 	const [contacts, setContacts] = useState<Contact[]>(CONTACTS);
 	const [contact, setContact] = useState<Contact | undefined>();
+	const [search, setSearch] = useState('');
 
 	const sortedContacts = useMemo(() => sortContacts(contacts), [contacts]);
-	const contactGroups = useMemo(() => groupContacts(contacts, TAB_GROUPS), [sortedContacts]);
+	const contactGroups = useMemo(() => groupContacts(sortedContacts, TAB_GROUPS), [sortedContacts]);
+	const searchResults = useMemo(
+		() => (search ? searchContacts(sortedContacts, search) : []),
+		[sortedContacts, search]
+	);
+
+	const handleSearchSubmit = (term: string) => {
+		setSearch(term);
+		setTab('search');
+	};
 
 	const handleClickTab = (value: string) => {
 		setTab(value);
@@ -74,8 +86,18 @@ export default function App() {
 
 	return (
 		<div className="max-w-5xl mx-auto p-4">
-			<header className="mb-4">
-				<h1 className="font-bold text-3xl">Address Book</h1>
+			<header className="flex flex-col md:flex-row mb-4">
+				<h1 className="mb-2 md:flex-grow md:mb-0 md:mr-4 font-bold text-3xl">Address Book</h1>
+				<div className="flex flex-row">
+					<SearchBox
+						className="flex-grow mr-4"
+						placeholder="Search contacts..."
+						onSubmit={handleSearchSubmit}
+					/>
+					<Button buttonType="default">
+						<FontAwesomeIcon icon={faPlus} />
+					</Button>
+				</div>
 			</header>
 			<main>
 				<TabPanel
@@ -108,9 +130,9 @@ export default function App() {
 							</TabContent>
 						))}
 						<TabContent tab="search">
-							<h2 className="mb-2 font-bold text-xl">Search Results</h2>
+							<h2 className="mb-2 font-bold text-lg">Search Results</h2>
 							<ContactList
-								contacts={[]}
+								contacts={searchResults}
 								onClickDelete={handleClickDeleteContact}
 								onClickEdit={handleClickEditContact}
 							/>
