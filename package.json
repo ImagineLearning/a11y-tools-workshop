@@ -10,7 +10,8 @@
 		"eject": "react-scripts eject",
 		"storybook": "start-storybook -p 6006 -s public",
 		"build-storybook": "build-storybook -s public",
-		"cypress": "cypress open"
+		"cypress": "cypress open",
+		"lint": "eslint src/**/*.{ts,tsx}"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -46,7 +47,6 @@
 		"@types/uuid": "^8.3.0",
 		"autoprefixer": "^9",
 		"cross-env": "^7.0.3",
-		"cypress": "^7.4.0",
 		"husky": "^4",
 		"lint-staged": "^11.0.0",
 		"postcss": "^7",
@@ -63,7 +63,8 @@
 	"eslintConfig": {
 		"extends": [
 			"react-app",
-			"react-app/jest"
+			"react-app/jest",
+			"plugin:jsx-a11y/recommended"
 		],
 		"overrides": [
 			{
