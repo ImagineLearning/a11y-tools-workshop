@@ -2893,6 +2893,14 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
+"@types/jest-axe@^3.5.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@types/jest-axe/-/jest-axe-3.5.1.tgz#122c3864e361c8d699e60814a6a7f6851101d263"
+  integrity sha512-yelGgELc6iJEPShJ3/XEu6uUr5rCGi/Md0QzMuoo53y0WpR2lyFM3mjdpo8Q+PPd3onHOpIw6BBzEAIU65ZFSA==
+  dependencies:
+    "@types/jest" "*"
+    axe-core "^3.5.5"
+
 "@types/jest@*", "@types/jest@^26.0.15":
   version "26.0.23"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.23.tgz#a1b7eab3c503b80451d019efb588ec63522ee4e7"
@@ -8931,6 +8939,16 @@ iterate-value@^1.0.2:
     es-get-iterator "^1.0.2"
     iterate-iterator "^1.0.1"
 
+jest-axe@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/jest-axe/-/jest-axe-4.1.0.tgz#5e73069c6517ffa106f31bb6a589a09250e4a04c"
+  integrity sha512-TPWRbwQYwdt1jtvM0DRi//0e51omWirMkyf99paeY7kYS5XsUZ9IcyP4omrqPKJ46xHDxs1AYqIwVz/minBoFw==
+  dependencies:
+    axe-core "^4.0.1"
+    chalk "^4.0.0"
+    jest-matcher-utils "^26.0.1"
+    lodash.merge "^4.6.2"
+
 jest-changed-files@^26.6.2:
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-26.6.2.tgz#f6198479e1cc66f22f9ae1e22acaa0b429c042d0"
@@ -9121,7 +9139,7 @@ jest-leak-detector@^26.6.2:
     jest-get-type "^26.3.0"
     pretty-format "^26.6.2"
 
-jest-matcher-utils@^26.6.0, jest-matcher-utils@^26.6.2:
+jest-matcher-utils@^26.0.1, jest-matcher-utils@^26.6.0, jest-matcher-utils@^26.6.2:
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-26.6.2.tgz#8e6fd6e863c8b2d31ac6472eeb237bc595e53e7a"
   integrity sha512-llnc8vQgYcNqDrqRDXWwMr9i7rS5XFiCwvh6DTP7Jqa2mqpcCBBlpCbn+trkG0KNhPu/h8rzyBkriOtBstvWhw==
