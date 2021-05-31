@@ -30,6 +30,7 @@
 	"devDependencies": {
 		"@craco/craco": "^6.1.2",
 		"@imaginelearning/test-storybook-a11y": "^0.1.3",
+		"@storybook/addon-a11y": "^6.2.9",
 		"@storybook/addon-actions": "^6.2.9",
 		"@storybook/addon-essentials": "^6.2.9",
 		"@storybook/addon-links": "^6.2.9",
