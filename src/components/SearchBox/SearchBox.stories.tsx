@@ -15,3 +15,8 @@ export const Default = Template.bind({});
 Default.args = {
 	placeholder: 'Search...',
 };
+
+export const WithText = Template.bind({});
+WithText.args = {
+	initialValue: 'Text entered',
+};

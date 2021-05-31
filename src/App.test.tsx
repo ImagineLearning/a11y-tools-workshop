@@ -25,17 +25,20 @@ describe('<App />', () => {
 	});
 
 	it('adds contact', async () => {
-		const { getByPlaceholderText, getByText, getAllByRole } = render(<App />);
+		const { getByText, getAllByRole } = render(<App />);
 
 		const addButton = getAllByRole('button').find((button) =>
 			/border-gray-300 bg-gray-100/.test(button.className)
 		);
 
 		userEvent.click(addButton);
-		const firstNameField = getByPlaceholderText('First Name');
+
+		const inputs = getAllByRole('textbox');
+
+		const firstNameField = inputs.find((input) => (input as HTMLInputElement).name === 'firstName');
 		userEvent.type(firstNameField, 'Bob');
 
-		const lastNameField = getByPlaceholderText('Last Name');
+		const lastNameField = inputs.find((input) => (input as HTMLInputElement).name === 'lastName');
 		userEvent.type(lastNameField, 'Bobertson');
 
 		const submitButton = getAllByRole('button').find(

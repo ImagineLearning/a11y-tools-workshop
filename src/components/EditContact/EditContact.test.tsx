@@ -32,8 +32,10 @@ describe('<EditContact />', () => {
 	});
 
 	it('displays validation error for empty first name field', async () => {
-		const { getByPlaceholderText, getByText } = render(<EditContact />);
-		const input = getByPlaceholderText('First Name');
+		const { getAllByRole, getByText } = render(<EditContact />);
+		const input = getAllByRole('textbox').find(
+			(i) => (i as HTMLInputElement).name === 'firstName'
+		) as HTMLInputElement;
 
 		fireEvent.focus(input);
 		fireEvent.blur(input);
@@ -44,8 +46,10 @@ describe('<EditContact />', () => {
 	});
 
 	it('displays validation error for empty last name field', async () => {
-		const { getByPlaceholderText, getByText } = render(<EditContact />);
-		const input = getByPlaceholderText('Last Name');
+		const { getAllByRole, getByText } = render(<EditContact />);
+		const input = getAllByRole('textbox').find(
+			(i) => (i as HTMLInputElement).name === 'lastName'
+		) as HTMLInputElement;
 
 		fireEvent.focus(input);
 		fireEvent.blur(input);
@@ -56,8 +60,10 @@ describe('<EditContact />', () => {
 	});
 
 	it('displays validation error for invalid email', async () => {
-		const { getByPlaceholderText, getByText } = render(<EditContact />);
-		const input = getByPlaceholderText('Email Address');
+		const { getAllByRole, getByText } = render(<EditContact />);
+		const input = getAllByRole('textbox').find(
+			(i) => (i as HTMLInputElement).name === 'email'
+		) as HTMLInputElement;
 
 		userEvent.type(input, 'you@example');
 		fireEvent.blur(input);
@@ -68,8 +74,10 @@ describe('<EditContact />', () => {
 	});
 
 	it('displays validation error for invalid phone number', async () => {
-		const { getByPlaceholderText, getByText } = render(<EditContact />);
-		const input = getByPlaceholderText('Phone Number');
+		const { getAllByRole, getByText } = render(<EditContact />);
+		const input = getAllByRole('textbox').find(
+			(i) => (i as HTMLInputElement).name === 'phone'
+		) as HTMLInputElement;
 
 		userEvent.type(input, '555-5555');
 		fireEvent.blur(input);

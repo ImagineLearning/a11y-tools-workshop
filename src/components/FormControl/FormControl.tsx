@@ -6,8 +6,10 @@ export interface FormControlProps {
 	className?: string;
 	error?: string;
 	inputClassName?: string;
+	labelClassName?: string;
 	label?: string;
 	name?: string;
+	placeholder?: string;
 	type?: 'email' | 'multiline' | 'password' | 'tel' | 'text';
 	value?: string;
 	onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -19,7 +21,9 @@ function FormControl({
 	error,
 	inputClassName,
 	label,
+	labelClassName,
 	name,
+	placeholder,
 	type = 'text',
 	value,
 	onBlur,
@@ -35,10 +39,11 @@ function FormControl({
 
 	return (
 		<div className={className}>
+			{label && <strong className={classNames('block text-sm', labelClassName)}>{label}</strong>}
 			<TextInput
 				className={inputClasses}
 				name={name}
-				placeholder={label}
+				placeholder={placeholder}
 				type={type}
 				value={value}
 				onBlur={onBlur}

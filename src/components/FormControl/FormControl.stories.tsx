@@ -13,7 +13,7 @@ const Template: Story<FormControlProps> = (args) => <FormControl {...args} />;
 
 export const Text = Template.bind({});
 Text.args = {
-	label: 'Enter text...',
+	label: 'Enter Text',
 };
 
 export const TextWithError = Template.bind({});
