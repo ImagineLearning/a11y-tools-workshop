@@ -1,12 +1,13 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
 
 export interface SearchBoxProps {
 	className?: string;
 	initialValue?: string;
 	placeholder?: string;
+	onReset?(): void;
 	onSubmit?(text: string): void;
 }
 
@@ -14,6 +15,7 @@ export default function SearchBox({
 	className,
 	initialValue = '',
 	placeholder,
+	onReset,
 	onSubmit,
 }: SearchBoxProps) {
 	const [value, setValue] = useState(initialValue);
@@ -21,6 +23,12 @@ export default function SearchBox({
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		onSubmit?.(value);
+	};
+
+	const handleClickReset = (e: MouseEvent) => {
+		e.preventDefault();
+		setValue('');
+		onReset?.();
 	};
 
 	const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +45,15 @@ export default function SearchBox({
 					value={value}
 					onChange={handleChange}
 				/>
-				<button className="flex-shrink px-2 rounded-l-none rounded-r-md" type="submit">
+				<span
+					className={classNames('flex-shrink self-center px-2 cursor-pointer', {
+						invisible: !value,
+					})}
+					onClick={handleClickReset}
+				>
+					<FontAwesomeIcon icon={faTimes} />
+				</span>
+				<button className="flex-shrink pr-2 rounded-l-none rounded-r-md" type="submit">
 					<FontAwesomeIcon icon={faSearch} />
 				</button>
 			</div>

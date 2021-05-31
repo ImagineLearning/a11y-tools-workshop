@@ -44,6 +44,10 @@ export default function App() {
 		setTab('search');
 	};
 
+	const handleSearchReset = () => {
+		setSearch('');
+	};
+
 	const handleClickTab = (value: string) => {
 		setTab(value);
 	};
@@ -95,6 +99,7 @@ export default function App() {
 					<SearchBox
 						className="flex-grow mr-4"
 						placeholder="Search contacts..."
+						onReset={handleSearchReset}
 						onSubmit={handleSearchSubmit}
 					/>
 					<Button buttonType="default" onClick={handleClickAddContact}>
