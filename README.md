@@ -1,46 +1,89 @@
-# Getting Started with Create React App
+# Accessibility Tools Workshop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple React application for demonstrating the use of various accessibility testing tools.
+The project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and styled with [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss).
+It uses [Storybook](https://github.com/storybookjs/storybook) to facilitate building UI components in isolation.
 
-## Available Scripts
+## TL;DR
 
-In the project directory, you can run:
+```sh
+git clone https://github.com/ImagineLearning/a11y-tools-workshop.git
+cd a11y-tools-workshop
+yarn install
+yarn start
+```
 
-### `yarn start`
+## Prerequisites
 
-Runs the app in the development mode.\
+The following software/configuration is needed to work with this project.
+
+### Node
+
+This project is built to work with current versions of Node. Using a tool like Node Version Manager (nvm) is recommended. Follow the instructions for installing on your platform:
+
+- [Mac OSX](https://github.com/nvm-sh/nvm#installation-and-update)
+- [Windows](https://github.com/coreybutler/nvm-windows/releases)
+
+If you prefer not to use nvm, you can [download the installer](https://nodejs.org/en/download/current/) for your platform from the [Node website](https://nodejs.org)
+
+### Yarn
+
+This project uses [Yarn](https://classic.yarnpkg.com/lang/en/) for managing dependencies.
+If you do not have have Yarn installed on your system, follow the [installation instructions on the Yarn website](https://classic.yarnpkg.com/en/docs/install).
+
+Alternatively, you can use npm for managing dependencies.
+
+### GitHub Package Registry
+
+This workshop will make use of packages hosted through [GitHub Package Registry (GPR)](https://github.com/features/packages).
+Currently, [GPR requires an access token](https://github.community/t/download-from-github-package-registry-without-authentication/14407)
+even if the package is publicly available.
+Be sure you've properly [configured Yarn with your personal access token](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages) to avoid issues installing packages.
+
+## Getting Started
+
+### Install dependencies
+
+Install the project dependencies by running the following command in the project directory:
+
+```sh
+yarn install
+```
+
+### Run application
+
+Start the development server by running the following command in the project directory:
+
+```sh
+yarn start
+```
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The page will reload if you make edits. You will also see any lint errors in the console.
 
-### `yarn test`
+### Run Storybook
 
-Launches the test runner in the interactive watch mode.\
+Start the Storybook development server by running the following command in the project directory:
+
+```sh
+yarn storybook
+```
+
+Open [http://localhost:6006](http://loalhost:6006) to view it in the browser.
+
+The page will reload if you make edits.
+
+### Run unit tests
+
+Launches the test runner in the interactive watch mode by running the following command in the project directory:
+
+```sh
+yarn test
+```
+
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can learn more from the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started) and [Storybook documentation](https://storybook.js.org/docs/react/get-started/introduction).
