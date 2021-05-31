@@ -46,7 +46,7 @@ export default function SearchBox({
 					onChange={handleChange}
 				/>
 				<button
-					className={classNames('flex-shrink pl-2 pr-1 cursor-pointer', {
+					className={classNames('flex-shrink pl-2 pr-1', {
 						invisible: !value,
 					})}
 					type="button"
