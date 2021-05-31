@@ -97,10 +97,12 @@ export default function EditContact({
 								type="submit"
 								buttonType="primary"
 							>
-								<FontAwesomeIcon icon={faCheck} />
+								<FontAwesomeIcon className="mr-2" icon={faCheck} />
+								Save
 							</Button>
 							<Button className="w-full md:w-auto" type="button" onClick={onCancel}>
-								<FontAwesomeIcon icon={faBan} />
+								<FontAwesomeIcon className="mr-2" icon={faBan} />
+								Cancel
 							</Button>
 						</div>
 					</form>

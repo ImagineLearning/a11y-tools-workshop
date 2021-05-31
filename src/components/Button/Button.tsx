@@ -16,7 +16,7 @@ export default function Button({
 	onClick,
 }: PropsWithChildren<ButtonProps>) {
 	const classes = classNames(
-		'px-2 py-1 rounded-md',
+		'px-4 py-1 rounded-md',
 		{
 			'border-2': buttonType !== 'clear',
 			'border-gray-300 bg-gray-100': buttonType === 'default',

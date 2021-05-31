@@ -46,14 +46,14 @@ export default function SearchBox({
 					onChange={handleChange}
 				/>
 				<span
-					className={classNames('flex-shrink self-center px-2 cursor-pointer', {
+					className={classNames('flex-shrink self-center pl-2 pr-1 cursor-pointer', {
 						invisible: !value,
 					})}
 					onClick={handleClickReset}
 				>
 					<FontAwesomeIcon icon={faTimes} />
 				</span>
-				<button className="flex-shrink pr-2 rounded-l-none rounded-r-md" type="submit">
+				<button className="flex-shrink pl-1 pr-2 rounded-l-none rounded-r-md" type="submit">
 					<FontAwesomeIcon icon={faSearch} />
 				</button>
 			</div>

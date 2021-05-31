@@ -35,7 +35,8 @@ export default function DeleteContactModal({
 					buttonType="alert"
 					onClick={onClickConfirm}
 				>
-					<FontAwesomeIcon icon={faTrash} /> Yes
+					<FontAwesomeIcon className="mr-2" icon={faTrash} />
+					Yes
 				</Button>
 				<Button
 					className="w-full md:w-auto"
@@ -43,7 +44,8 @@ export default function DeleteContactModal({
 					buttonType="default"
 					onClick={onClickCancel}
 				>
-					<FontAwesomeIcon icon={faBan} /> No
+					<FontAwesomeIcon className="mr-2" icon={faBan} />
+					No
 				</Button>
 			</div>
 		</Modal>
