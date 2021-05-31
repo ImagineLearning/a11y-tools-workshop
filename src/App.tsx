@@ -84,6 +84,15 @@ export default function App() {
 		setDeleteModalOpen(false);
 	};
 
+	const handleConfirmDelete = () => {
+		const { id: deleteId } = contact ?? {};
+		if (deleteId) {
+			setContacts((prev) => prev.filter(({ id }) => id !== deleteId));
+		}
+		setContact(undefined);
+		setDeleteModalOpen(false);
+	};
+
 	return (
 		<div className="max-w-5xl mx-auto p-4">
 			<header className="flex flex-col md:flex-row mb-4">
@@ -152,6 +161,7 @@ export default function App() {
 					isOpen={deleteModalOpen}
 					name={`${contact?.firstName} ${contact?.lastName}`}
 					onClickCancel={handleCancelDelete}
+					onClickConfirm={handleConfirmDelete}
 				/>
 			</main>
 		</div>
