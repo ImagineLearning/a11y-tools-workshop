@@ -41,3 +41,9 @@ Default.args = {
 		},
 	],
 };
+
+export const Empty = Template.bind({});
+Empty.args = {
+	title: 'A - G',
+	emptyContent: <p>No contacts.</p>,
+};

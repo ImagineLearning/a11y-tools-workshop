@@ -35,6 +35,12 @@ describe('<ContactList />', () => {
 		expect(getByText('Bobertson, Bob')).toBeInTheDocument();
 	});
 
+	it('renders empty state if no contacts', () => {
+		const { getByText } = render(<ContactList emptyContent="No contacts" />);
+
+		expect(getByText('No contacts')).toBeInTheDocument();
+	});
+
 	it('renders title', () => {
 		const { getByText } = render(<ContactList title="My Title" contacts={contacts} />);
 
