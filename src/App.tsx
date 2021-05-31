@@ -124,15 +124,19 @@ export default function App() {
 							<TabContent key={group} tab={group}>
 								<ContactList
 									contacts={contactGroups[group]}
+									emptyContent={<p className="pt-4 pb-8">No contacts.</p>}
 									onClickDelete={handleClickDeleteContact}
 									onClickEdit={handleClickEditContact}
 								/>
 							</TabContent>
 						))}
 						<TabContent tab="search">
-							<h2 className="mb-2 font-bold text-lg">Search Results</h2>
+							<h2 className="mb-2 font-bold text-xl">
+								Search Results: <em className="font-normal">{search}</em>
+							</h2>
 							<ContactList
 								contacts={searchResults}
+								emptyContent={<p className="pb-8">No matching contacts found.</p>}
 								onClickDelete={handleClickDeleteContact}
 								onClickEdit={handleClickEditContact}
 							/>
