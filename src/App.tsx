@@ -64,6 +64,10 @@ export default function App() {
 		setTab(value);
 	};
 
+	const handleClickAddContact = () => {
+		setEditModalOpen(true);
+	};
+
 	const handleClickDeleteContact = (contact: Contact) => {
 		setContact(contact);
 		setDeleteModalOpen(true);
@@ -75,6 +79,12 @@ export default function App() {
 	};
 
 	const handleCancelEdit = () => {
+		setContact(undefined);
+		setEditModalOpen(false);
+	};
+
+	const handleSubmitEdit = (contact: Contact) => {
+		setContacts((prev) => prev.filter(({ id }) => id !== contact.id).concat([contact]));
 		setContact(undefined);
 		setEditModalOpen(false);
 	};
@@ -103,7 +113,7 @@ export default function App() {
 						placeholder="Search contacts..."
 						onSubmit={handleSearchSubmit}
 					/>
-					<Button buttonType="default">
+					<Button buttonType="default" onClick={handleClickAddContact}>
 						<FontAwesomeIcon icon={faPlus} />
 					</Button>
 				</div>
@@ -156,6 +166,7 @@ export default function App() {
 					isOpen={editModalOpen}
 					initialValues={contact}
 					onCancel={handleCancelEdit}
+					onSubmit={handleSubmitEdit}
 				/>
 				<DeleteContactModal
 					isOpen={deleteModalOpen}
