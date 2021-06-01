@@ -18,6 +18,7 @@ SingleLine.args = {
 
 export const SingleLineWithValue = Template.bind({});
 SingleLineWithValue.args = {
+	...SingleLine.args,
 	value: 'Text entered.',
 };
 
