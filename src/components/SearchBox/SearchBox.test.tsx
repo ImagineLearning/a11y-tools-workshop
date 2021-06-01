@@ -29,14 +29,14 @@ describe('<SearchBox />', () => {
 
 	it('reset button clears text and calls onReset() handler', () => {
 		const handleReset = jest.fn();
-		const { getByPlaceholderText } = render(
-			<SearchBox placeholder="Search..." onReset={handleReset} />
+		const { getByLabelText } = render(
+			<SearchBox label="Search" placeholder="Search..." onReset={handleReset} />
 		);
 
-		const input = getByPlaceholderText('Search...');
+		const input = getByLabelText('Search');
 		userEvent.type(input, 'This is my search');
 
-		const resetButton = input.nextElementSibling;
+		const resetButton = getByLabelText('Clear search');
 		userEvent.click(resetButton!);
 
 		expect((input as HTMLInputElement).value).toBe('');
