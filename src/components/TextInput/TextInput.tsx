@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { noop } from 'lodash';
 import React, { ChangeEventHandler, FocusEventHandler } from 'react';
 
 export interface TextInputProps {
@@ -21,7 +22,7 @@ export default function TextInput({
 	placeholder,
 	value,
 	onBlur,
-	onChange,
+	onChange = noop,
 	onFocus,
 }: TextInputProps) {
 	const classes = classNames(

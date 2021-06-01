@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import React from 'react';
 import SearchBox from './SearchBox';
+import { Default } from './SearchBox.stories';
 
 describe('<SearchBox />', () => {
 	it('renders placeholder text', () => {
@@ -45,6 +46,12 @@ describe('<SearchBox />', () => {
 
 	it('has no a11y violations', async () => {
 		const { container } = render(<SearchBox initialValue="Hello world!" />);
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
+	it('with no initial text has no a11y violations', async () => {
+		const { container } = render(<Default {...Default.args} />);
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
