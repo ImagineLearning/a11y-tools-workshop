@@ -29,23 +29,27 @@ describe('<App />', () => {
 
 		const addButton = getAllByRole('button').find((button) =>
 			/border-gray-300 bg-gray-100/.test(button.className)
-		);
+		) as HTMLButtonElement;
 
 		userEvent.click(addButton);
 
 		const inputs = getAllByRole('textbox');
 
-		const firstNameField = inputs.find((input) => (input as HTMLInputElement).name === 'firstName');
+		const firstNameField = inputs.find(
+			(input) => (input as HTMLInputElement).name === 'firstName'
+		) as HTMLInputElement;
 		userEvent.type(firstNameField, 'Bob');
 
-		const lastNameField = inputs.find((input) => (input as HTMLInputElement).name === 'lastName');
+		const lastNameField = inputs.find(
+			(input) => (input as HTMLInputElement).name === 'lastName'
+		) as HTMLInputElement;
 		userEvent.type(lastNameField, 'Bobertson');
 
 		const submitButton = getAllByRole('button').find(
 			(button) =>
 				(button as HTMLButtonElement).type === 'submit' &&
 				/border-blue-500 bg-blue-600/.test(button.className)
-		);
+		) as HTMLButtonElement;
 		userEvent.click(submitButton);
 
 		await waitFor(() => {
