@@ -48,7 +48,7 @@ describe('<App />', () => {
 		const submitButton = getAllByRole('button').find(
 			(button) =>
 				(button as HTMLButtonElement).type === 'submit' &&
-				/border-blue-500 bg-blue-600/.test(button.className)
+				/border-blue-600 bg-blue-500/.test(button.className)
 		) as HTMLButtonElement;
 		userEvent.click(submitButton);
 
