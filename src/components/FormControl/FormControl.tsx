@@ -38,8 +38,18 @@ function FormControl({
 	);
 
 	return (
-		<div className={className}>
-			{label && <strong className={classNames('block text-sm', labelClassName)}>{label}</strong>}
+		<label className={classNames('block', className)}>
+			{label && (
+				<strong
+					className={classNames(
+						'block text-sm',
+						{ 'sr-only': !label && !!placeholder },
+						labelClassName
+					)}
+				>
+					{label ?? placeholder}
+				</strong>
+			)}
 			<TextInput
 				className={inputClasses}
 				name={name}
@@ -50,7 +60,7 @@ function FormControl({
 				onChange={onChange}
 			/>
 			{error && <p className="mt-1 text-red-700">{error}</p>}
-		</div>
+		</label>
 	);
 }
 
