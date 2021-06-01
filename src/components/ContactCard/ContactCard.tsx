@@ -65,6 +65,7 @@ export default function ContactCard({
 						onClick={onClickEdit}
 					>
 						<FontAwesomeIcon icon={faEdit} />
+						<span className="sr-only">Edit Contact</span>
 					</Button>
 					<Button
 						className="text-sm text-gray-400 hover:text-red-700 focus:text-red-700"
@@ -72,6 +73,7 @@ export default function ContactCard({
 						onClick={onClickDelete}
 					>
 						<FontAwesomeIcon icon={faTrash} />
+						<span className="sr-only">Delete Contact</span>
 					</Button>
 				</div>
 			</div>
