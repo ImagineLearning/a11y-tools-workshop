@@ -70,7 +70,7 @@ Start the Storybook development server by running the following command in the p
 yarn storybook
 ```
 
-Open [http://localhost:6006](http://loalhost:6006) to view it in the browser.
+Open [http://localhost:6006](http://localhost:6006) to view it in the browser.
 
 The page will reload if you make edits.
 
