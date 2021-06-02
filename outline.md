@@ -194,7 +194,7 @@ Add discernable text to image buttons.
 	</button>
 ```
 
-Add label to text input. We _could_ use `aria-label` here, but it's better to use semantic HTML whenever possible.
+Add label to text input. We _could_ use `aria-label` here, but [it's better to use semantic HTML](https://www.w3.org/TR/using-aria/#rule1) whenever possible.
 
 ```diff
 export interface SearchBoxProps {
@@ -368,7 +368,8 @@ SingleLineWithValue.args = {
 Accessibility testing with `jest-axe` is fast and convenient, but Jest uses [`jsdom`](https://github.com/jsdom/jsdom) by default and doesn't render styles.
 So `jest-axe` will help identify structural accessibility issues, but won't necessarily capture visual issues such as color contrast.
 
-The `@storybook/addon-a11y` addon for Storybook will run axe-core accessibility tests on your stories in your browser. A complete report is displayed in the "Accessibility" tab of the Storybook UI.
+The `@storybook/addon-a11y` addon for Storybook will run axe-core accessibility tests on your stories in your browser.
+A complete report is displayed in the "Accessibility" tab of the Storybook UI.
 
 #### Installation and configuration
 
