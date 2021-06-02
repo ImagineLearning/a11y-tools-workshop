@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { MouseEventHandler, PropsWithChildren } from 'react';
 
 export interface ButtonProps {
+	ariaLabel?: string;
 	buttonType?: 'default' | 'primary' | 'secondary' | 'success' | 'alert' | 'warning' | 'clear';
 	className?: string;
 	type?: 'button' | 'submit' | 'reset';
@@ -9,6 +10,7 @@ export interface ButtonProps {
 }
 
 export default function Button({
+	ariaLabel,
 	buttonType = 'default',
 	className,
 	children,
@@ -20,7 +22,7 @@ export default function Button({
 		{
 			'border-2': buttonType !== 'clear',
 			'border-gray-300 bg-gray-100': buttonType === 'default',
-			'border-blue-600 bg-blue-500 text-white': buttonType === 'primary',
+			'border-blue-500 bg-blue-600 text-white': buttonType === 'primary',
 			'border-gray-400 bg-gray-300': buttonType === 'secondary',
 			'border-green-500 bg-green-600 text-white': buttonType === 'success',
 			'border-red-500 bg-red-600 text-white': buttonType === 'alert',
@@ -30,7 +32,7 @@ export default function Button({
 	);
 
 	return (
-		<button type={type} className={classes} onClick={onClick}>
+		<button type={type} className={classes} onClick={onClick} aria-label={ariaLabel}>
 			{children}
 		</button>
 	);
