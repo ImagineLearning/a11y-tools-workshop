@@ -14,12 +14,15 @@ export default function EditContactModal({
 }: EditContactModalProps) {
 	return (
 		<Modal
+			aria={{ labelledby: 'add-edit-contact-heading' }}
 			className={className}
 			isOpen={isOpen}
 			ariaHideApp={ariaHideApp}
 			onRequestClose={onCancel}
 		>
-			<h1 className="mb-4 font-bold text-xl">{`${initialValues ? 'Edit' : 'Add'} Contact`}</h1>
+			<h1 id="add-edit-contact-heading" className="mb-4 font-bold text-xl">{`${
+				initialValues ? 'Edit' : 'Add'
+			} Contact`}</h1>
 			<EditContact initialValues={initialValues} onCancel={onCancel} onSubmit={onSubmit} />
 		</Modal>
 	);
