@@ -487,7 +487,7 @@ Adjust background color for "Primary" button type.
 ```
 
 **Dialog must have an accessible name**\
-Expose `aria` prop from `ReactModal` in `Modal` component, then use the `aria-labeledby` attribute.
+Expose `aria` prop from `ReactModal` in `Modal` component, then use the `aria-labelledby` attribute.
 
 **Modal.tsx**\
 Expose `aria` prop.
@@ -515,7 +515,7 @@ export default function Modal({
 ```
 
 **EditContactModal.tsx**\
-Set `aria-labeledby` attribute.
+Set `aria-labelledby` attribute.
 
 ```diff
 	return (
@@ -535,10 +535,10 @@ Set `aria-labeledby` attribute.
 ```
 
 **Page must have one main landmark: `cypress/integration/app.test.ts`**\
-The `react-modal` package renders the modal use a React Portal, which is appended to the `body` element.
-This makes it very difficult to wrap the modal content inside the applications `main` landmark.
+The `react-modal` package renders the modal using a React Portal, which is appended to the `body` element.
+This makes it very difficult to wrap the modal content inside the application's `main` landmark.
 The `ReactModal` component adheres to all the WCAG recommendations for modal dialogs though,
-so we can bypass this particular error by providing a custom selector for the accessibility check to limit it to the modal content.
+so we can bypass this particular error by providing a custom selector for the accessibility check to limit it to the modal content. ¯\\\_(ツ)\_/¯
 
 ```diff
 	it('add contact form has no a11y violations', () => {
