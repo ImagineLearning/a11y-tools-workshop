@@ -45,11 +45,7 @@ describe('<App />', () => {
 		) as HTMLInputElement;
 		userEvent.type(lastNameField, 'Bobertson');
 
-		const submitButton = getAllByRole('button').find(
-			(button) =>
-				(button as HTMLButtonElement).type === 'submit' &&
-				/border-blue-600 bg-blue-500/.test(button.className)
-		) as HTMLButtonElement;
+		const submitButton = getByText('Save');
 		userEvent.click(submitButton);
 
 		await waitFor(() => {
