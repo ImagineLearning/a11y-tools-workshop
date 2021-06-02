@@ -104,6 +104,7 @@ export default function App() {
 					/>
 					<Button buttonType="default" onClick={handleClickAddContact}>
 						<FontAwesomeIcon icon={faPlus} />
+						<span className="sr-only">Add Contact</span>
 					</Button>
 				</div>
 			</header>
@@ -121,6 +122,7 @@ export default function App() {
 							))}
 							<Tab className="font-bold" value="search">
 								<FontAwesomeIcon icon={faSearch} />
+								<span className="sr-only">Search Results</span>
 							</Tab>
 						</>
 					}
