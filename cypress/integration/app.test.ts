@@ -37,4 +37,35 @@ describe('App integration tests', () => {
 
 		cy.get('.TabPanel > div > div').should('contain', 'Bobertson, Bob');
 	});
+
+	it('contact list has no a11y violations', () => {
+		localStorage.setItem(
+			'contacts',
+			JSON.stringify([
+				{
+					id: 1,
+					firstName: 'Bob',
+					lastName: 'Bobertson',
+					email: 'bob@example.com',
+					phone: '555-555-5555',
+					address: '1234 Street\nAnytown, USA',
+				},
+			])
+		);
+
+		cy.visit('/');
+		cy.injectAxe();
+
+		cy.checkA11y();
+	});
+
+	it('add contact form has no a11y violations', () => {
+		cy.visit('/');
+		cy.injectAxe();
+
+		cy.get('header svg[data-icon="plus"]').click();
+
+		// Limit to just the modal to avoid `landmark-one-main` error
+		cy.checkA11y('.ReactModalPortal');
+	});
 });
