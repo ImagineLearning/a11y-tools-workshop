@@ -5,7 +5,14 @@
 		"noEmit": true,
 		// be explicit about types included
 		// to avoid clashing with Jest types
-		"types": ["cypress"]
+		"types": ["cypress", "@axe-devtools/cypress"]
 	},
-	"include": ["../node_modules/cypress", "./**/*.ts"]
+	"include": [
+		"./**/*.js",
+		"./**/*.ts",
+		"../src/**/*.cy.test.ts",
+		"../src/**/*.cy.test.tsx",
+		"../src/testUtils/mountWithStyles.ts"
+	],
+	"exclude": []
 }

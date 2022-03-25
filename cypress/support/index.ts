@@ -14,7 +14,18 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
+import '@axe-devtools/cypress';
 import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+after(() => {
+	const resultsDir = './axe-results/';
+	cy.getAxeResults().then((results) => {
+		// create the directory with results
+		cy.writeFile(`${resultsDir}results.json`, results);
+	});
+	cy.task('reportAsHTML', { resultsDir });
+	cy.task('reportAsJunit', { resultsDir });
+});
