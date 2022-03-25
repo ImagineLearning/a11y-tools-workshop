@@ -1,7 +1,9 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import jestAxeDevTools from '../../testUtils/jestAxeDevTools';
 import SearchBox from './SearchBox';
+import { axe as jestAxe } from 'jest-axe';
 
 describe('<SearchBox />', () => {
 	it('renders placeholder text', () => {
@@ -38,5 +40,17 @@ describe('<SearchBox />', () => {
 
 		expect((input as HTMLInputElement).value).toBe('');
 		expect(handleReset).toHaveBeenCalled();
+	});
+
+	it('has no Axe DevTools a11y violations', async () => {
+		const { container } = render(<SearchBox placeholder="Search..." />);
+		const results = await jestAxeDevTools(container, 'SearchBox');
+		expect(results).toHaveNoViolations();
+	});
+
+	it('has no jest-axe a11y violations', async () => {
+		const { container } = render(<SearchBox placeholder="Search..." />);
+		const results = await jestAxe(container);
+		expect(results).toHaveNoViolations();
 	});
 });
