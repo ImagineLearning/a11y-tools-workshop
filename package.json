@@ -5,8 +5,12 @@
 	"scripts": {
 		"start": "craco start",
 		"build": "craco build",
-		"test": "craco test",
-		"test:ci": "cross-env CI=true craco test --coverage",
+		"test": "yarn test:jest && cypress run-ct",
+		"test:jest": "craco test --testPathIgnorePatterns=\"src/.*\\.cy\\.test\\.[jt]sx?$\"",
+		"test:jest:ci": "cross-env CI=true yarn test:jest --coverage",
+		"test:ci": "cross-env CI=true yarn test:jest --coverage && cypress run-ct",
+		"test:cy": "cypress open-ct",
+		"test:cy:ci": "cypress run-ct",
 		"eject": "react-scripts eject",
 		"storybook": "start-storybook -p 6006 -s public",
 		"build-storybook": "build-storybook -s public",
@@ -27,17 +31,24 @@
 		"yup": "^0.32.9"
 	},
 	"devDependencies": {
+		"@axe-devtools/browser": "^4.4.0",
+		"@axe-devtools/cypress": "^4.4.0",
+		"@axe-devtools/reporter": "^4.4.0",
 		"@craco/craco": "^6.1.2",
+		"@cypress/react": "^5.12.4",
+		"@cypress/webpack-dev-server": "^1.8.3",
 		"@storybook/addon-actions": "^6.2.9",
 		"@storybook/addon-essentials": "^6.2.9",
 		"@storybook/addon-links": "^6.2.9",
 		"@storybook/node-logger": "^6.2.9",
 		"@storybook/preset-create-react-app": "^3.1.7",
 		"@storybook/react": "^6.2.9",
+		"@testing-library/cypress": "^8.0.2",
 		"@testing-library/jest-dom": "^5.11.4",
 		"@testing-library/react": "^11.1.0",
 		"@testing-library/user-event": "^13.1.9",
-		"@types/jest": "^26.0.15",
+		"@types/jest": "^27.4.1",
+		"@types/jest-axe": "^3.5.3",
 		"@types/lodash-es": "^4.17.4",
 		"@types/node": "^12.0.0",
 		"@types/react": "^17.0.0",
@@ -46,8 +57,9 @@
 		"@types/uuid": "^8.3.0",
 		"autoprefixer": "^9",
 		"cross-env": "^7.0.3",
-		"cypress": "^7.4.0",
+		"cypress": "^9.5.2",
 		"husky": "^4",
+		"jest-axe": "^6.0.0",
 		"lint-staged": "^11.0.0",
 		"postcss": "^7",
 		"postcss-import": "^12",
@@ -62,8 +74,7 @@
 	},
 	"eslintConfig": {
 		"extends": [
-			"react-app",
-			"react-app/jest"
+			"react-app"
 		],
 		"overrides": [
 			{
@@ -73,6 +84,16 @@
 				"rules": {
 					"import/no-anonymous-default-export": "off"
 				}
+			},
+			{
+				"files": [
+					"**/*.test.*",
+					"**/*.spec.*",
+					"!**/*.cy.test.*"
+				],
+				"extends": [
+					"react-app/jest"
+				]
 			}
 		]
 	},
