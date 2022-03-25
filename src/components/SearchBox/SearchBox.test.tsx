@@ -1,3 +1,4 @@
+import axeDevTools from '@axe-devtools/browser';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe as jestAxe } from 'jest-axe';
@@ -51,7 +52,16 @@ describe('<SearchBox />', () => {
 		expect(handleReset).toHaveBeenCalled();
 	});
 
-	it('has no Axe DevTools a11y violations', async () => {
+	it('has no @axe-devtools/browser a11y violations', async () => {
+		await new Promise((resolve, reject) => {
+			axeDevTools.init('wcag2', resolve, reject);
+		});
+		const { container } = render(<SearchBox placeholder="Search..." />);
+		const { violations } = await axeDevTools.run(container);
+		expect(violations).toHaveLength(0);
+	});
+
+	it('has no JestAxeDevTools a11y violations', async () => {
 		const { container } = render(<SearchBox placeholder="Search..." />);
 		const results = await jestAxeDevTools(container, 'Empty');
 		expect(results).toHaveNoViolations();
