@@ -1,11 +1,20 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
-import jestAxeDevTools from '../../testUtils/jestAxeDevTools';
-import SearchBox from './SearchBox';
 import { axe as jestAxe } from 'jest-axe';
+import React from 'react';
+import jestAxeDevTools, { JestAxeDevTools } from '../../testUtils/jestAxeDevTools';
+import SearchBox from './SearchBox';
 
 describe('<SearchBox />', () => {
+	beforeAll(() => {
+		JestAxeDevTools.initReporter('SearchBox');
+	});
+
+	afterAll(async () => {
+		await JestAxeDevTools.writeReports(JestAxeDevTools.reportsDirectory, 'html', 'junit');
+		JestAxeDevTools.cleanUp();
+	});
+
 	it('renders placeholder text', () => {
 		const { getByPlaceholderText } = render(<SearchBox placeholder="Search..." />);
 		expect(getByPlaceholderText('Search...')).toBeInTheDocument();
@@ -44,7 +53,7 @@ describe('<SearchBox />', () => {
 
 	it('has no Axe DevTools a11y violations', async () => {
 		const { container } = render(<SearchBox placeholder="Search..." />);
-		const results = await jestAxeDevTools(container, 'SearchBox');
+		const results = await jestAxeDevTools(container, 'Empty');
 		expect(results).toHaveNoViolations();
 	});
 

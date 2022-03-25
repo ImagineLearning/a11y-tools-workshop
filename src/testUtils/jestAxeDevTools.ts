@@ -5,6 +5,8 @@ import { AxeResults } from 'axe-core';
 export class JestAxeDevTools {
 	static reporter?: Reporter;
 
+	static reportsDirectory = './axe-results';
+
 	constructor(private rules: Ruleset = 'wcag2', private reporter = JestAxeDevTools.reporter) {}
 
 	static cleanUp() {
@@ -13,6 +15,26 @@ export class JestAxeDevTools {
 
 	static initReporter(suiteName = 'a11y-tools-workshop', directory = 'axe-results') {
 		JestAxeDevTools.reporter = new Reporter(suiteName, directory);
+	}
+
+	static writeReports(
+		directory = JestAxeDevTools.reportsDirectory,
+		...formats: ('csv' | 'html' | 'junit')[]
+	) {
+		const promises = (formats ?? ['csv', 'html', 'junit']).map((format) => {
+			if (format === 'csv') {
+				return JestAxeDevTools.reporter?.buildCSV(directory);
+			}
+			if (format === 'html') {
+				return JestAxeDevTools.reporter?.buildHTML(directory);
+			}
+			if (format === 'junit') {
+				return JestAxeDevTools.reporter?.buildJUnitXML(directory);
+			}
+			return Promise.resolve();
+		});
+
+		return Promise.all(promises);
 	}
 
 	init() {
